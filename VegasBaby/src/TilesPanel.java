@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
@@ -60,5 +61,26 @@ public class TilesPanel extends JPanel {
 		  }
 	  }
 	  
+  }
+  public void mouseClicked (MouseEvent e) {
+	  int xVal = e.getX();
+	  int yVal = e.getY();
+	  System.out.print(getX());
+	  System.out.print(getY());
+	  for (Tiles loca: tile) {
+		  if (xVal>20 && xVal<190 && yVal>100 && yVal<270) {
+			  loca.setRandomly();
+			  System.out.print("First tile");
+		  } else if (xVal>200 && xVal<370 && yVal>100 && yVal<270) {
+			  loca.setRandomly();
+			  System.out.print("Second tile");
+		  } else if (xVal>380 && xVal<550 && yVal>100 && yVal<270) {
+			  loca.setRandomly();
+			  System.out.print("Third tile");
+		  } else if (xVal>560 && xVal<730 && yVal>100 && yVal<270) {
+			  loca.setRandomly();
+			  System.out.print("Fourth tile");
+		  }
+	  } repaint();
   }
 }

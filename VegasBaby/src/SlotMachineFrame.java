@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 
 public class SlotMachineFrame extends JFrame {
-	private TilesPanel til;
+	TilesPanel panCenter;
 	public void vegasMenu() {
 		JMenuBar menu = new JMenuBar();	
 		JMenu fileMenu = new JMenu ("File");
@@ -30,7 +30,7 @@ public class SlotMachineFrame extends JFrame {
 				TileWriter tw = new TileWriter();
 				if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 					
-					if (tw.writeToText(fc.getSelectedFile(),til.getTile())) {
+					if (tw.writeToText(fc.getSelectedFile(),panCenter.getTile())) {
 						JOptionPane.showMessageDialog(null,"Tiles were written.");
 					} else {
 						JOptionPane.showMessageDialog(null,"Tiles could not be written.");
@@ -78,7 +78,7 @@ public class SlotMachineFrame extends JFrame {
 			frameCenter(800, 480);
 			setTitle ("Vegas Baby Vegas Slot Machine ");
 			Container co = getContentPane();
-			TilesPanel panCenter = new TilesPanel();
+			panCenter = new TilesPanel();
 			co.add(panCenter,BorderLayout.CENTER);
 			JPanel panSouth = new JPanel ();
 			panSouth.setLayout(new FlowLayout());

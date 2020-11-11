@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Tiles {
 	private int x;
@@ -45,6 +46,11 @@ public class Tiles {
 		setShape(shape);
 		setColor(color);
 		size=170;
+	}
+	public void setRandomly () {
+		Random random = new Random();
+        color = random.nextInt(5)+1;
+        shape = random.nextInt(1)+1; 
 	}
 	@Override
 	public String toString() {
