@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Container;
 
 import javax.swing.JButton;
@@ -20,6 +21,9 @@ import javax.swing.JTextField;
 
 public class SlotMachineFrame extends JFrame {
 	TilesPanel panCenter;
+	/**
+	 * Sets up the menu at the top of the program with file and help being shown 
+	 */
 	public void vegasMenu() {
 		JMenuBar menu = new JMenuBar();	
 		JMenu fileMenu = new JMenu ("File");
@@ -29,8 +33,11 @@ public class SlotMachineFrame extends JFrame {
 				JFileChooser fc = new JFileChooser();
 				TileWriter tw = new TileWriter();
 				if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					
 					if (tw.writeToText(fc.getSelectedFile(),panCenter.getTile())) {
+						JOptionPane.showMessageDialog(null,"Tiles were written.");
+					} else if (tw.writeToBinary(fc.getSelectedFile(),panCenter.getTile())) {
+						JOptionPane.showMessageDialog(null,"Tiles were written.");
+					} else if (tw.writeToXML(fc.getSelectedFile(),panCenter.getTile())) {
 						JOptionPane.showMessageDialog(null,"Tiles were written.");
 					} else {
 						JOptionPane.showMessageDialog(null,"Tiles could not be written.");
@@ -40,16 +47,40 @@ public class SlotMachineFrame extends JFrame {
 		});
 		fileMenu.add(saveMenu);
 		JMenuItem loadMenu = new JMenuItem("Load Tiles"); 
-		//Action Listener stuff
+		loadMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent k) {
+				JFileChooser fc = new JFileChooser();
+				TileReader tr;
+				ArrayList<Tiles> tilesRead;
+				if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					tr = new TileReader();
+					tilesRead = tr.read(fc.getSelectedFile());
+					if (tilesRead == null) {
+						JOptionPane.showMessageDialog(null,"Could not read.");
+					} else {
+						panCenter.setTiles(tilesRead);
+						repaint();
+					}
+				}
+			}
+		});
 		fileMenu.add(loadMenu);
 		JMenuItem print = new JMenuItem("Print"); 
 		//Action Listener stuff
 		fileMenu.add(print);
 		JMenuItem restart = new JMenuItem("Restart");
-		//Action Listener stuff
+		restart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//add later 
+			}
+		});
 		fileMenu.add(restart);
 		JMenuItem exit = new JMenuItem("Exit");
-		//Action Listener stuff
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		fileMenu.add(exit);
 		menu.add(fileMenu);
 		JMenu helpMenu = new JMenu("Help");
@@ -63,7 +94,11 @@ public class SlotMachineFrame extends JFrame {
 		menu.add(helpMenu);
 		setJMenuBar(menu);
 		}
-		
+		/** 
+		 * This function centers the frame of the program 
+		 * @param wide ~ how wide the screen is 
+		 * @param tall ~ how tall the screen is 
+		 */
 		public void frameCenter(int wide, int tall) {
 			Toolkit tk = Toolkit.getDefaultToolkit();
 			Dimension screenDim = tk.getScreenSize();
@@ -73,7 +108,9 @@ public class SlotMachineFrame extends JFrame {
 			int y = (screenTall- tall)/2;
 			setBounds(x,y,wide,tall);
 		}
-		
+		/**
+		 * This function sets up how the center and bottom of the frame of the program will look
+		 */
 		public void slotMachineLook() {
 			frameCenter(800, 480);
 			setTitle ("Vegas Baby Vegas Slot Machine ");
@@ -98,6 +135,9 @@ public class SlotMachineFrame extends JFrame {
 			co.add(panSouth, BorderLayout.SOUTH);
 			vegasMenu();
 		}
+		/**
+		 * This function closes the program when the user exits the program
+		 */
 		public SlotMachineFrame () {
 			slotMachineLook();
 			setDefaultCloseOperation(EXIT_ON_CLOSE);

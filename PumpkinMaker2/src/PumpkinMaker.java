@@ -200,11 +200,11 @@ class PumpkinSettings extends JPanel {
 	
 }
 /** handles the input of the button  */
-class ButtonHandler implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null,"was handled by a different class");
-	}
-}
+//class ButtonHandler implements ActionListener {
+	//public void actionPerformed(ActionEvent e) {
+		//JOptionPane.showMessageDialog(null,"was handled by a different class");
+	//}
+//}
 class PumpFrame extends JFrame {
 	/** centers the frame */
 	public void centerFrame(int wide, int tall) {
