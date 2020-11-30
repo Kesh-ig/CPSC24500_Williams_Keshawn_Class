@@ -82,10 +82,12 @@ public class SlotMachineFrame extends JFrame {
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panCenter.newTile();
+				repaint();
 				mxButton.setEnabled(true);
 				mdButton.setEnabled(true);
 				mnButton.setEnabled(true);
 				panCenter.setCash(5);
+				monText.setText(String.format("%.2f", panCenter.getCash()));
 			}
 		});
 		fileMenu.add(restart);
@@ -155,7 +157,7 @@ public class SlotMachineFrame extends JFrame {
 					panCenter.newTile();
 					panCenter.tileChecketh(50,10);
 					monText.setText(String.format("%.2f", panCenter.getCash()));
-					if (panCenter.getCash()==0) {
+					if (panCenter.getCash()<0.009) {
 						mxButton.setEnabled(false);
 						mdButton.setEnabled(false);
 						mnButton.setEnabled(false);
@@ -171,7 +173,7 @@ public class SlotMachineFrame extends JFrame {
 					panCenter.newTile();
 					panCenter.tileChecketh(10,5);
 					monText.setText(String.format("%.2f", panCenter.getCash()));
-					if (panCenter.getCash()==0) {
+					if (panCenter.getCash()<0.005) {
 						mxButton.setEnabled(false);
 						mdButton.setEnabled(false);
 						mnButton.setEnabled(false);

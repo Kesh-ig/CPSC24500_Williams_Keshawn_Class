@@ -134,7 +134,7 @@ public class TilesPanel extends JPanel implements MouseListener {
 			  cash*=n;
 		  }
 	  }	else {
-		  cash-=cash*(m/100);
+		  cash-=cash*(m/100.0);
 	  }
   }
 }
