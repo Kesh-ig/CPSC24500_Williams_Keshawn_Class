@@ -102,6 +102,10 @@ public class Tiles implements Serializable {
 	public String getShapeAsString() {
 		return shapes[shape];
 	}
+	/**
+	 * This function connects the color and shape names to a string 
+	 * @return
+	 */
 	public String toStringWords() {
 		return String.format("%s %s", getColorName(), getShapeAsString());
 	}
